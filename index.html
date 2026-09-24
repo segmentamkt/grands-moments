@@ -36,6 +36,33 @@
 /* Production/mobile refinements */
 button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}.option,.video-tab,.selector-card,.btn{min-height:44px}.field{font-size:16px}.section:not(:first-of-type){content-visibility:auto;contain-intrinsic-size:900px}.mobile-quote{padding-bottom:max(14px,env(safe-area-inset-bottom))}.assist-launch{bottom:max(76px,calc(64px + env(safe-area-inset-bottom)))}
 @media(max-width:680px){body{padding-bottom:76px}.hero{padding-bottom:38px}.hero-actions .btn{flex:1 1 150px}.service-line{gap:12px}.service-line span:not(:last-child)::after{margin-left:12px}.selector-grid{-webkit-overflow-scrolling:touch}.video-collage{max-width:520px;margin-inline:auto}.quote-main{padding-bottom:32px}.quote-nav .btn{min-width:112px}.final-actions .btn{width:100%}.assist-panel{right:12px;bottom:138px;width:calc(100vw - 24px)}.footer{padding-bottom:50px}}
+
+/* Mobile video reliability fix: one active video at a time */
+@media(max-width:680px){
+  .motion-showcase{content-visibility:visible!important;contain:none!important;overflow:visible}
+  .video-layout-v3{display:block}
+  .video-copy{margin-bottom:24px}
+  .video-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;overflow:visible;padding-bottom:0}
+  .video-tab{width:100%;padding:10px 8px;font-size:.78rem}
+  .video-hint{margin-top:14px}
+  .video-collage{height:auto!important;max-width:430px;margin:24px auto 0!important;position:relative;overflow:visible}
+  .video-card,
+  .video-card.is-main,
+  .video-card.is-top,
+  .video-card.is-bottom{
+    position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+    width:100%!important;height:auto!important;aspect-ratio:9/16;
+    display:none;border:0!important;border-radius:24px;transform:none!important;
+    box-shadow:0 20px 50px rgba(40,22,49,.18)
+  }
+  .video-card.is-main{display:block!important}
+  .video-card.is-main:before{content:"Video seleccionado"}
+  .video-card video{width:100%;height:100%;object-fit:cover}
+  .video-card-ui{left:12px;right:12px;bottom:12px;align-items:center}
+  .video-label{max-width:56%;font-size:.8rem}
+  .sound-toggle{min-height:42px;padding:9px 12px}
+}
+
 @media(max-width:420px){h1{font-size:clamp(2.8rem,15vw,4.2rem)}.hero-collage{height:420px}.hero-main{inset:18px 46px 18px 0}.hero-small-a{width:126px;height:165px}.hero-small-b{width:142px;height:186px}.hero-badge{max-width:190px;padding:13px 14px}.gallery{grid-auto-rows:178px}.video-collage{height:530px}.video-card.is-main{height:405px}.video-card.is-top{height:180px}.video-card.is-bottom{height:220px}.sound-toggle{font-size:.64rem;padding:7px 9px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
@@ -128,13 +155,13 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}.opti
   <div class="video-copy reveal">
     <div class="eyebrow">En movimiento</div>
     <h2>Mira cómo una idea cobra vida</h2>
-    <p class="lead">Tres celebraciones reales, tres estilos distintos. Los videos se reproducen al mismo tiempo para que puedas recorrer el trabajo de Grands Moments de una forma más visual.</p>
+    <p class="lead">Tres celebraciones reales, tres estilos distintos. Elige una categoría para ver cada montaje y activar el sonido cuando quieras.</p>
     <div class="video-tabs" aria-label="Elegir video destacado">
       <button class="video-tab active" data-video="cumple" type="button">Cumpleaños</button>
       <button class="video-tab" data-video="baby" type="button">Bebés</button>
       <button class="video-tab" data-video="infantil" type="button">Infantil</button>
     </div>
-    <p class="video-hint">Todos se reproducen sin sonido. Puedes activar el audio del que quieras escuchar; los demás permanecerán en silencio.</p>
+    <p class="video-hint">En celular mostramos un video a la vez para que cargue mejor. Puedes cambiar de categoría y activar el sonido del que quieras ver.</p>
   </div>
 
   <div class="video-collage reveal" data-delay="1" id="videoCollage">
@@ -223,10 +250,11 @@ selectorButtons.forEach(btn=>btn.addEventListener('click',()=>{
   if(filterToQuote[activeFilter]) selectQuoteEvent(filterToQuote[activeFilter]);
 }));
 
-// Video showcase: three simultaneous muted videos, one selectable audio track.
+// Video showcase: desktop keeps the 3-video collage; mobile uses one reliable active video at a time.
 const videoCards=[...document.querySelectorAll('[data-video-card]')];
 const videoTabs=[...document.querySelectorAll('.video-tab')];
 const soundButtons=[...document.querySelectorAll('[data-sound]')];
+const mobileVideoMode=window.matchMedia('(max-width:680px)');
 const videos={
   cumple:document.querySelector('#video-cumple'),
   baby:document.querySelector('#video-baby'),
@@ -236,13 +264,33 @@ Object.entries(videos).forEach(([key,el])=>{
   el.src=videoSources[key];
   el.muted=true;
   el.defaultMuted=true;
+  el.setAttribute('muted','');
   el.playsInline=true;
+  el.setAttribute('playsinline','');
 });
 
+let activeVideoKey='cumple';
 function resolvedVideoKey(key){return key==='especial'?'cumple':key==='all'?'cumple':key}
+function safePlay(el){
+  if(!el)return;
+  const p=el.play();
+  if(p&&typeof p.catch==='function')p.catch(()=>{});
+}
+function syncVideoPlayback(){
+  const isMobile=mobileVideoMode.matches;
+  Object.entries(videos).forEach(([key,el])=>{
+    if(isMobile){
+      if(key===activeVideoKey)safePlay(el);
+      else el.pause();
+    }else{
+      safePlay(el);
+    }
+  });
+}
 function focusVideo(key){
   const resolved=resolvedVideoKey(key);
   if(!videos[resolved])return;
+  activeVideoKey=resolved;
   const order=['cumple','baby','infantil'];
   const others=order.filter(k=>k!==resolved);
   videoCards.forEach(card=>{
@@ -253,6 +301,7 @@ function focusVideo(key){
     else card.classList.add('is-bottom');
   });
   videoTabs.forEach(b=>b.classList.toggle('active',b.dataset.video===resolved));
+  syncVideoPlayback();
 }
 function muteAll(exceptKey=null){
   Object.entries(videos).forEach(([key,el])=>{
@@ -264,9 +313,13 @@ function muteAll(exceptKey=null){
     btn.textContent=active?'Silenciar':'Activar sonido';
   });
 }
-videoTabs.forEach(btn=>btn.addEventListener('click',()=>focusVideo(btn.dataset.video)));
+videoTabs.forEach(btn=>btn.addEventListener('click',()=>{
+  muteAll();
+  focusVideo(btn.dataset.video);
+}));
 videoCards.forEach(card=>card.addEventListener('click',e=>{
   if(e.target.closest('.sound-toggle'))return;
+  muteAll();
   focusVideo(card.dataset.videoCard);
 }));
 soundButtons.forEach(btn=>btn.addEventListener('click',e=>{
@@ -276,21 +329,32 @@ soundButtons.forEach(btn=>btn.addEventListener('click',e=>{
   const wantsSound=el.muted;
   muteAll(wantsSound?key:null);
   if(wantsSound){
-    el.muted=false;
-    el.play().catch(()=>{});
     focusVideo(key);
+    el.muted=false;
+    safePlay(el);
   }
 }));
 const videoSection=document.querySelector('#videoCollage');
 const videoObserver=new IntersectionObserver(entries=>entries.forEach(e=>{
   if(e.isIntersecting){
-    Object.values(videos).forEach(v=>v.play().catch(()=>{}));
+    syncVideoPlayback();
   }else{
     Object.values(videos).forEach(v=>v.pause());
     muteAll();
   }
-}),{threshold:.18});
+}),{threshold:.08,rootMargin:'80px 0px 80px 0px'});
 if(videoSection)videoObserver.observe(videoSection);
+if(mobileVideoMode.addEventListener){
+  mobileVideoMode.addEventListener('change',()=>{
+    muteAll();
+    focusVideo(activeVideoKey);
+  });
+}else if(mobileVideoMode.addListener){
+  mobileVideoMode.addListener(()=>{
+    muteAll();
+    focusVideo(activeVideoKey);
+  });
+}
 focusVideo('cumple');
 
 // Quote wizard.
