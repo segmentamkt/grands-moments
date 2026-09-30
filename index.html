@@ -32,7 +32,15 @@
 .multi-select-note span{font-weight:800;color:var(--purple)}
 .multi-select-note strong{font-size:.8rem;color:#746a78;text-align:right}
 @media(max-width:680px){.multi-select-note{align-items:flex-start;flex-direction:column;gap:3px}.multi-select-note strong{text-align:left}}
-.field{width:100%;border:1px solid var(--line);border-radius:16px;padding:15px 16px;background:#fff;color:var(--ink);outline:none}.field:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(74,36,97,.09)}textarea.field{min-height:130px;resize:vertical}.quote-nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px}.quote-summary{background:#f8f4f8;border-radius:18px;padding:20px;margin:18px 0}.quote-summary dl{display:grid;grid-template-columns:125px 1fr;gap:8px 12px;margin:0}.quote-summary dt{color:var(--muted);font-weight:700}.quote-summary dd{margin:0;font-weight:800}.final-actions{display:flex;gap:12px;flex-wrap:wrap}
+.field{width:100%;border:1px solid var(--line);border-radius:16px;padding:15px 16px;background:#fff;color:var(--ink);outline:none}.field:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(74,36,97,.09)}
+.lead-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.lead-fields .field{min-height:52px}
+.consent-row{display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fbfafc;color:#665e69;font-size:.8rem;line-height:1.45}
+.consent-row input{width:18px;height:18px;flex:0 0 auto;margin-top:1px;accent-color:var(--purple)}
+.consent-row strong{color:var(--ink)}
+.campaign-note{margin-top:12px;color:#837987;font-size:.76rem;line-height:1.45}
+@media(max-width:680px){.lead-fields{grid-template-columns:1fr}.consent-row{font-size:.78rem}}
+textarea.field{min-height:130px;resize:vertical}.quote-nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px}.quote-summary{background:#f8f4f8;border-radius:18px;padding:20px;margin:18px 0}.quote-summary dl{display:grid;grid-template-columns:125px 1fr;gap:8px 12px;margin:0}.quote-summary dt{color:var(--muted);font-weight:700}.quote-summary dd{margin:0;font-weight:800}.final-actions{display:flex;gap:12px;flex-wrap:wrap}
 .final-cta{padding:110px 0;background:#1e1425;color:#fff;text-align:center;position:relative;overflow:hidden}.final-cta:before{content:"";position:absolute;inset:-30%;background:radial-gradient(circle at 30% 40%,rgba(24,199,206,.15),transparent 30%),radial-gradient(circle at 70% 50%,rgba(233,43,138,.12),transparent 28%);pointer-events:none}.final-cta .container{position:relative}.final-cta p{color:#cfc5d2;margin:0 auto 26px;max-width:620px}.final-cta .big{font-size:clamp(2.7rem,6vw,6rem);line-height:.96;letter-spacing:-.06em;font-weight:950;max-width:900px;margin:0 auto 28px}
 .footer{background:#160f1a;color:#c8beca;padding:35px 0}.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:.9rem}.footer a{color:#fff;font-weight:800}
 .assist-launch{position:fixed;right:22px;bottom:22px;z-index:60;border:0;border-radius:999px;background:#fff;color:var(--purple);box-shadow:0 16px 50px rgba(28,15,34,.2);padding:13px 16px;font-weight:900;border:1px solid var(--line)}.assist-panel{position:fixed;right:22px;bottom:82px;width:min(360px,calc(100vw - 32px));background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 24px 70px rgba(28,15,34,.22);z-index:61;overflow:hidden;opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:.25s ease}.assist-panel.open{opacity:1;transform:none;pointer-events:auto}.assist-head{padding:18px 18px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.assist-head strong{font-size:1rem}.assist-close{border:0;background:none;font-size:1.3rem;color:#7c737f}.assist-body{padding:18px}.assist-body p{color:#5d555f;margin-bottom:15px}.assist-options{display:grid;gap:9px}.assist-options button{border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px;text-align:left;font-weight:800;color:#4d4650}.assist-options button:hover{border-color:var(--purple);color:var(--purple)}
@@ -156,34 +164,56 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}.opti
     </article><article class="work-card reveal " data-category="infantil" aria-label="Goku Baby">
       <img loading="lazy" decoding="async" src="data:application/octet-stream;base64," data-inline-src="goku-baby.webp" alt="Decoración infantil temática">
       <div class="work-meta"><span>Fiesta infantil</span><strong>Goku Baby</strong></div>
-    </article></div>
+    </article>
+  <article class="work-card reveal wide" data-category="especial" aria-label="Cumpleaños adulto con iluminación, sonido y decoración">
+    <img loading="lazy" decoding="async" src="assets/adult-29.webp" alt="Montaje de cumpleaños adulto en negro y dorado con iluminación, sonido y números luminosos">
+    <div class="work-meta"><span>Ocasión especial</span><strong>Celebración adulta · montaje integral</strong></div>
+  </article>
+  <article class="work-card reveal tall" data-category="especial" aria-label="Decoración temática inspirada en Michael Jackson">
+    <img loading="lazy" decoding="async" src="assets/adult-michael.webp" alt="Decoración temática en blanco, negro y plateado inspirada en Michael Jackson">
+    <div class="work-meta"><span>Ocasión especial</span><strong>Temática personalizada</strong></div>
+  </article>
+  <article class="work-card reveal" data-category="baby" aria-label="Decoración de bebé en azul y dorado">
+    <img loading="lazy" decoding="async" src="assets/baby-goku-new.webp" alt="Decoración para bebé en tonos azul, blanco y dorado">
+    <div class="work-meta"><span>Baby Shower</span><strong>Baby en azul y dorado</strong></div>
+  </article>
+  <article class="work-card reveal" data-category="baby" aria-label="Decoración de bebé en rosa y dorado">
+    <img loading="lazy" decoding="async" src="assets/baby-martina-new.webp" alt="Decoración para bebé en tonos rosa, beige y dorado">
+    <div class="work-meta"><span>Baby Shower</span><strong>Martina · rosa y dorado</strong></div>
+  </article>
+  <article class="work-card reveal" data-category="infantil" aria-label="Fiesta infantil temática">
+    <img loading="lazy" decoding="async" src="assets/infantil-sofia.webp" alt="Celebración infantil temática en tonos rosa">
+    <div class="work-meta"><span>Fiesta infantil</span><strong>Celebración temática infantil</strong></div>
+  </article>
+
+</div>
 </div></section>
 
 <section class="section motion-showcase" id="videos"><div class="container video-layout-v3">
   <div class="video-copy reveal">
     <div class="eyebrow">En movimiento</div>
     <h2>Mira cómo una idea cobra vida</h2>
-    <p class="lead">Tres celebraciones reales, tres estilos distintos. Elige una categoría para ver cada montaje y activar el sonido cuando quieras.</p>
+    <p class="lead">Nuevos montajes reales para que veas distintas formas de llevar una idea a la celebración. Elige una categoría y recorre cada trabajo en video.</p>
     <div class="video-tabs" aria-label="Elegir video destacado">
       <button class="video-tab active" data-video="cumple" type="button">Cumpleaños</button>
       <button class="video-tab" data-video="baby" type="button">Bebés</button>
       <button class="video-tab" data-video="infantil" type="button">Infantil</button>
     </div>
-    <p class="video-hint">En celular mostramos un video a la vez para que cargue mejor. Puedes cambiar de categoría y activar el sonido del que quieras ver.</p>
+    <p class="video-hint">En celular mostramos un video a la vez para que cargue rápido. Puedes cambiar de categoría y activar el sonido cuando quieras.</p>
   </div>
 
   <div class="video-collage reveal" data-delay="1" id="videoCollage">
     <article class="video-card is-main" data-video-card="cumple">
-      <video id="video-cumple" data-inline-poster="yeison-poster.webp" muted loop playsinline preload="metadata" aria-label="Video de cumpleaños temático"></video>
-      <div class="video-card-ui"><span class="video-label">Cumpleaños temático</span><button class="sound-toggle" data-sound="cumple" type="button">Activar sonido</button></div>
+      <video id="video-cumple" poster="assets/adult-michael.webp" muted loop playsinline preload="metadata" aria-label="Video de celebración temática para adultos"></video>
+      <div class="video-card-ui"><span class="video-label">Celebración temática</span><button class="sound-toggle" data-sound="cumple" type="button">Activar sonido</button></div>
     </article>
     <article class="video-card is-top" data-video-card="baby">
-      <video id="video-baby" data-inline-poster="martin-video-poster.webp" muted loop playsinline preload="metadata" aria-label="Video de celebración para bebé"></video>
-      <div class="video-card-ui"><span class="video-label">Bienvenida de Martín</span><button class="sound-toggle" data-sound="baby" type="button">Activar sonido</button></div>
+      <video id="video-baby" poster="assets/baby-martina-new.webp" muted loop playsinline preload="metadata" aria-label="Video de detalles para celebración de bebé"></video>
+      <div class="video-card-ui"><span class="video-label">Detalles para bebé</span><button class="sound-toggle" data-sound="baby" type="button">Activar sonido</button></div>
     </article>
     <article class="video-card is-bottom" data-video-card="infantil">
-      <video id="video-infantil" data-inline-poster="granja-video-poster.webp" muted loop playsinline preload="metadata" aria-label="Video de fiesta infantil"></video>
-      <div class="video-card-ui"><span class="video-label">Fiesta infantil · La Granja</span><button class="sound-toggle" data-sound="infantil" type="button">Activar sonido</button></div>
+      <video id="video-infantil" poster="assets/infantil-sofia.webp" muted loop playsinline preload="metadata" aria-label="Video de montaje infantil"></video>
+      <div class="video-card-ui"><span class="video-label">Montaje infantil</span><button class="sound-toggle" data-sound="infantil" type="button">Activar sonido</button></div>
     </article>
   </div>
 </div></section>
@@ -211,14 +241,14 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}.opti
     <div class="quote-step active" data-step="1"><h3>1. ¿Qué vas a celebrar?</h3><p class="hint">Selecciona una opción para continuar.</p><div class="option-grid" id="eventOptions"><button class="option" data-value="Cumpleaños">Cumpleaños</button><button class="option" data-value="Baby Shower">Baby Shower</button><button class="option" data-value="Fiesta infantil">Fiesta infantil</button><button class="option" data-value="Ocasión especial">Ocasión especial</button></div></div>
     <div class="quote-step" data-step="2"><h3>2. ¿Qué servicios necesitas?</h3><p class="hint">Puedes elegir <strong>uno o varios servicios</strong>. Toca cada opción que quieras incluir en tu cotización.</p><div class="multi-select-note" role="status" aria-live="polite"><span>Selección múltiple disponible</span><strong id="serviceSelectionCount">Ningún servicio seleccionado</strong></div><div class="option-grid" id="serviceOptions"><button class="option" data-value="Decoración" aria-pressed="false">Decoración</button><button class="option" data-value="Sonido" aria-pressed="false">Sonido</button><button class="option" data-value="Luces" aria-pressed="false">Luces</button><button class="option" data-value="Recreación" aria-pressed="false">Recreación</button></div></div>
     <div class="quote-step" data-step="3"><h3>3. ¿Cuándo será?</h3><p class="hint">Si aún no tienes fecha, puedes dejarla vacía.</p><input class="field" id="eventDate" type="date" aria-label="Fecha del evento"></div>
-    <div class="quote-step" data-step="4"><h3>4. ¿Qué tienes en mente?</h3><p class="hint">Una temática, colores, una referencia o cualquier detalle que ayude a entender tu idea.</p><textarea class="field" id="eventIdea" placeholder="Ejemplo: una fiesta infantil inspirada en granja, con tonos rojo, verde y azul."></textarea><div class="quote-summary" id="quoteSummary"></div><div class="final-actions"><button class="btn btn-primary" id="whatsappBtn" type="button">Continuar por WhatsApp</button><button class="btn btn-secondary" id="restartBtn" type="button">Empezar de nuevo</button></div></div>
+    <div class="quote-step" data-step="4"><h3>4. Cuéntanos tu idea y cómo contactarte</h3><p class="hint">Déjanos los datos básicos para preparar tu solicitud y continuar contigo por WhatsApp.</p><textarea class="field" id="eventIdea" placeholder="Ejemplo: una fiesta infantil inspirada en granja, con tonos rojo, verde y azul."></textarea><div class="lead-fields"><input class="field" id="leadName" type="text" autocomplete="name" placeholder="Tu nombre" aria-label="Nombre"><input class="field" id="leadPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Tu número de WhatsApp" aria-label="Número de WhatsApp"></div><label class="consent-row"><input id="leadConsent" type="checkbox"><span><strong>Autorizo el contacto por WhatsApp</strong> para atender esta solicitud de cotización y dar seguimiento relacionado con mi evento.</span></label><p class="campaign-note">Tus datos se solicitan únicamente para poder responder esta cotización.</p><div class="quote-summary" id="quoteSummary"></div><div class="final-actions"><button class="btn btn-primary" id="whatsappBtn" type="button">Recibir mi cotización por WhatsApp</button><button class="btn btn-secondary" id="restartBtn" type="button">Empezar de nuevo</button></div></div>
     <div class="quote-nav"><button class="btn btn-secondary" id="prevStep" type="button" style="visibility:hidden">Atrás</button><button class="btn btn-primary" id="nextStep" type="button">Continuar</button></div>
   </div>
 </div></div></section>
 
 <section class="final-cta"><div class="container reveal"><div class="eyebrow" style="color:#8fe5e7">Grands Moments</div><div class="big">Hay momentos que solo pasan una vez.</div><p>Cuéntanos qué vas a celebrar y construyamos una propuesta alrededor de tu idea, tu espacio y tu presupuesto.</p><a class="btn btn-primary" href="#cotizador" style="background:#fff;color:#32163f">Cotizar mi celebración</a></div></section>
 </main>
-<footer class="footer"><div class="container footer-inner"><div>Grands Moments · Bogotá y alrededores</div><div><a href="https://www.instagram.com/gra_ndsmoments/" target="_blank" rel="noopener">Instagram @gra_ndsmoments</a> &nbsp;·&nbsp; <a href="https://wa.me/573202260890" target="_blank" rel="noopener">WhatsApp 320 226 0890</a></div></div></footer>
+<footer class="footer"><div class="container footer-inner"><div>Grands Moments · Bogotá y alrededores · V4</div><div><a href="https://www.instagram.com/gra_ndsmoments/" target="_blank" rel="noopener">Instagram @gra_ndsmoments</a> &nbsp;·&nbsp; <a href="https://wa.me/573202260890" target="_blank" rel="noopener">WhatsApp 320 226 0890</a></div></div></footer>
 
 <button class="assist-launch" id="assistLaunch" type="button">¿Necesitas ayuda para cotizar?</button>
 <div class="assist-panel" id="assistPanel" role="dialog" aria-label="Ayuda para cotizar"><div class="assist-head"><strong>Asesor de cotización</strong><button class="assist-close" id="assistClose" type="button" aria-label="Cerrar">×</button></div><div class="assist-body"><p>¿En qué punto estás? Puedo llevarte al lugar correcto de la página.</p><div class="assist-options"><button data-action="quote">Quiero cotizar ahora</button><button data-action="ideas">Quiero ver ideas reales</button><button data-action="services">No sé qué servicios elegir</button></div></div></div>
@@ -230,7 +260,45 @@ document.querySelectorAll('[data-inline-src]').forEach(el=>{const k=el.dataset.i
 document.querySelectorAll('[data-inline-poster]').forEach(el=>{const k=el.dataset.inlinePoster;if(ASSETS[k])el.poster=ASSETS[k]});
 
 const WHATSAPP='573202260890';
-const videoSources={'cumple':ASSETS["yeison.mp4"],'baby':ASSETS["martin-video.mp4"],'infantil':ASSETS["granja-video.mp4"],'especial':ASSETS["yeison.mp4"],'all':ASSETS["martin-video.mp4"]};
+
+// Campaign tracking layer. Add the real Meta Pixel ID before launch.
+const META_PIXEL_ID='';
+const acquisitionParams=(()=>{
+  const p=new URLSearchParams(location.search);
+  const current={
+    utm_source:p.get('utm_source')||'',
+    utm_medium:p.get('utm_medium')||'',
+    utm_campaign:p.get('utm_campaign')||'',
+    utm_content:p.get('utm_content')||'',
+    fbclid:p.get('fbclid')||''
+  };
+  const hasCampaign=Object.values(current).some(Boolean);
+  if(hasCampaign){try{sessionStorage.setItem('gm_acquisition',JSON.stringify(current))}catch(e){}}
+  try{return JSON.parse(sessionStorage.getItem('gm_acquisition'))||current}catch(e){return current}
+})();
+function makeEventId(prefix='gm'){
+  if(window.crypto&&crypto.randomUUID)return prefix+'_'+crypto.randomUUID();
+  return prefix+'_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+}
+function pushTracking(name,params={},eventId=null){
+  const payload={event:name,event_id:eventId||makeEventId(name.toLowerCase()),...params,...acquisitionParams};
+  window.dataLayer=window.dataLayer||[];
+  window.dataLayer.push(payload);
+  window.dispatchEvent(new CustomEvent('gm:tracking',{detail:payload}));
+  if(typeof window.fbq==='function'){
+    const standard=['PageView','ViewContent','Lead','Contact'].includes(name);
+    window.fbq(standard?'track':'trackCustom',name,params,{eventID:payload.event_id});
+  }
+  return payload.event_id;
+}
+function initMetaPixel(){
+  if(!/^\d{8,20}$/.test(META_PIXEL_ID))return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init',META_PIXEL_ID);
+  pushTracking('PageView',{page_type:'landing'});
+}
+initMetaPixel();
+const videoSources={'cumple':'assets/video-adult-mj.mp4','baby':'assets/video-baby.mp4','infantil':'assets/video-infantil.mp4','especial':'assets/video-adult-mj.mp4','all':'assets/video-adult-mj.mp4'};
 const filterLabels={all:'Todos los trabajos',cumple:'Cumpleaños',baby:'Baby Shower',infantil:'Fiesta infantil',especial:'Ocasión especial'};
 const filterToQuote={cumple:'Cumpleaños',baby:'Baby Shower',infantil:'Fiesta infantil',especial:'Ocasión especial'};
 
@@ -247,7 +315,7 @@ const selectorButtons=[...document.querySelectorAll('.selector-card')];
 const workCards=[...document.querySelectorAll('.work-card')];
 const portfolioTitle=document.querySelector('#portfolioTitle');
 const portfolioCount=document.querySelector('#portfolioCount');
-let activeFilter='all';
+let activeFilter='all';portfolioCount.textContent=`${workCards.length} ideas reales`;
 selectorButtons.forEach(btn=>btn.addEventListener('click',()=>{
   activeFilter=btn.dataset.filter;
   selectorButtons.forEach(b=>b.classList.toggle('active',b===btn));
@@ -366,7 +434,7 @@ if(mobileVideoMode.addEventListener){
 focusVideo('cumple');
 
 // Quote wizard.
-let quote={event:'',services:[],date:'',idea:''},step=1;
+let quote={event:'',services:[],date:'',idea:'',name:'',phone:''},step=1;
 const steps=[...document.querySelectorAll('.quote-step')],pills=[...document.querySelectorAll('.step-pill')];
 const prev=document.querySelector('#prevStep'),next=document.querySelector('#nextStep');
 const eventBtns=[...document.querySelectorAll('#eventOptions .option')],serviceBtns=[...document.querySelectorAll('#serviceOptions .option')];
@@ -391,14 +459,17 @@ serviceBtns.forEach(b=>b.addEventListener('click',()=>{
 }));
 function renderStep(){steps.forEach(s=>s.classList.toggle('active',Number(s.dataset.step)===step));pills.forEach((p,i)=>p.classList.toggle('active',i<step));prev.style.visibility=step===1?'hidden':'visible';next.style.display=step===4?'none':'inline-flex';if(step===4)renderSummary();}
 function canAdvance(){if(step===1&&!quote.event){alert('Selecciona el tipo de evento para continuar.');return false}if(step===2&&quote.services.length===0){alert('Selecciona al menos un servicio para continuar.');return false}return true}
-next.addEventListener('click',()=>{if(!canAdvance())return;if(step===3)quote.date=document.querySelector('#eventDate').value;if(step<4){step++;renderStep()}});prev.addEventListener('click',()=>{if(step>1){step--;renderStep()}});
-document.querySelector('#eventIdea').addEventListener('input',e=>{quote.idea=e.target.value;renderSummary()});
+let quoteStarted=false;
+next.addEventListener('click',()=>{if(!canAdvance())return;if(!quoteStarted){quoteStarted=true;pushTracking('QuoteStart',{entry_point:'guided_quote'})}if(step===3)quote.date=document.querySelector('#eventDate').value;if(step<4){step++;renderStep()}});prev.addEventListener('click',()=>{if(step>1){step--;renderStep()}});
+document.querySelector('#eventIdea').addEventListener('input',e=>{quote.idea=e.target.value;renderSummary()});document.querySelector('#leadName').addEventListener('input',renderSummary);document.querySelector('#leadPhone').addEventListener('input',renderSummary);
 document.querySelector('#eventDate').addEventListener('change',e=>quote.date=e.target.value);
 function formatDate(value){if(!value)return 'Por definir';const [y,m,d]=value.split('-').map(Number);return new Intl.DateTimeFormat('es-CO',{day:'numeric',month:'long',year:'numeric'}).format(new Date(y,m-1,d));}
-function renderSummary(){quote.date=document.querySelector('#eventDate').value;quote.idea=document.querySelector('#eventIdea').value.trim();document.querySelector('#quoteSummary').innerHTML=`<dl><dt>Evento</dt><dd>${quote.event||'Por definir'}</dd><dt>Servicios</dt><dd>${quote.services.join(' + ')||'Por definir'}</dd><dt>Fecha</dt><dd>${formatDate(quote.date)}</dd><dt>Idea</dt><dd>${quote.idea||'Sin detalle adicional'}</dd></dl>`;}
+function renderSummary(){quote.date=document.querySelector('#eventDate').value;quote.idea=document.querySelector('#eventIdea').value.trim();quote.name=document.querySelector('#leadName').value.trim();quote.phone=document.querySelector('#leadPhone').value.trim();document.querySelector('#quoteSummary').innerHTML=`<dl><dt>Evento</dt><dd>${quote.event||'Por definir'}</dd><dt>Servicios</dt><dd>${quote.services.join(' + ')||'Por definir'}</dd><dt>Fecha</dt><dd>${formatDate(quote.date)}</dd><dt>Idea</dt><dd>${quote.idea||'Sin detalle adicional'}</dd><dt>Nombre</dt><dd>${quote.name||'Por definir'}</dd><dt>WhatsApp</dt><dd>${quote.phone||'Por definir'}</dd></dl>`;}
 function whatsappMessage(){
   const msg=`Hola, vi la página de Grands Moments y quiero cotizar mi celebración.
 
+- Nombre: ${quote.name||'Por definir'}
+- WhatsApp: ${quote.phone||'Por definir'}
 - Evento: ${quote.event||'Por definir'}
 - Servicios: ${quote.services.join(' + ')||'Por definir'}
 - Fecha: ${formatDate(quote.date)}
@@ -407,10 +478,36 @@ function whatsappMessage(){
 Quisiera recibir más información.`;
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg.normalize('NFC'))}`;
 }
-document.querySelector('#whatsappBtn').addEventListener('click',()=>{renderSummary();window.open(whatsappMessage(),'_blank','noopener')});
-document.querySelector('#restartBtn').addEventListener('click',()=>{quote={event:'',services:[],date:'',idea:''};eventBtns.forEach(b=>b.classList.remove('selected'));document.querySelector('#eventDate').value='';document.querySelector('#eventIdea').value='';renderServiceSelection();step=1;renderStep();});
+function validateLead(){
+  quote.name=document.querySelector('#leadName').value.trim();
+  quote.phone=document.querySelector('#leadPhone').value.trim();
+  const digits=quote.phone.replace(/\D/g,'');
+  if(quote.name.length<2){alert('Escribe tu nombre para continuar.');document.querySelector('#leadName').focus();return false}
+  if(digits.length<7){alert('Escribe un número de WhatsApp válido para continuar.');document.querySelector('#leadPhone').focus();return false}
+  if(!document.querySelector('#leadConsent').checked){alert('Autoriza el contacto por WhatsApp para continuar.');return false}
+  return true;
+}
+document.querySelector('#whatsappBtn').addEventListener('click',()=>{
+  renderSummary();
+  if(!validateLead())return;
+  const leadEventId=makeEventId('lead');
+  pushTracking('Lead',{event_type:quote.event||'Por definir',services_count:quote.services.length},leadEventId);
+  pushTracking('Contact',{channel:'whatsapp',event_type:quote.event||'Por definir'});
+  window.open(whatsappMessage(),'_blank','noopener');
+});
+document.querySelector('#restartBtn').addEventListener('click',()=>{quote={event:'',services:[],date:'',idea:'',name:'',phone:''};eventBtns.forEach(b=>b.classList.remove('selected'));document.querySelector('#eventDate').value='';document.querySelector('#eventIdea').value='';document.querySelector('#leadName').value='';document.querySelector('#leadPhone').value='';document.querySelector('#leadConsent').checked=false;renderServiceSelection();step=1;renderStep();});
 renderServiceSelection();
 renderStep();
+
+// Content-quality signal for campaign measurement.
+let contentViewed=false;
+const contentTarget=document.querySelector('#videos')||document.querySelector('.gallery');
+if(contentTarget){
+  const contentObserver=new IntersectionObserver(entries=>entries.forEach(e=>{
+    if(e.isIntersecting&&!contentViewed){contentViewed=true;pushTracking('ViewContent',{content_name:'portfolio_and_video'});contentObserver.disconnect()}
+  }),{threshold:.2});
+  contentObserver.observe(contentTarget);
+}
 
 // Assistant.
 const panel=document.querySelector('#assistPanel');document.querySelector('#assistLaunch').addEventListener('click',()=>panel.classList.toggle('open'));document.querySelector('#assistClose').addEventListener('click',()=>panel.classList.remove('open'));
