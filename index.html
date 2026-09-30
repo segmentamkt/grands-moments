@@ -466,15 +466,15 @@ document.querySelector('#eventDate').addEventListener('change',e=>quote.date=e.t
 function formatDate(value){if(!value)return 'Por definir';const [y,m,d]=value.split('-').map(Number);return new Intl.DateTimeFormat('es-CO',{day:'numeric',month:'long',year:'numeric'}).format(new Date(y,m-1,d));}
 function renderSummary(){quote.date=document.querySelector('#eventDate').value;quote.idea=document.querySelector('#eventIdea').value.trim();quote.name=document.querySelector('#leadName').value.trim();document.querySelector('#quoteSummary').innerHTML=`<dl><dt>Evento</dt><dd>${quote.event||'Por definir'}</dd><dt>Servicios</dt><dd>${quote.services.join(' + ')||'Por definir'}</dd><dt>Fecha</dt><dd>${formatDate(quote.date)}</dd><dt>Idea</dt><dd>${quote.idea||'Sin detalle adicional'}</dd><dt>Nombre</dt><dd>${quote.name||'Por definir'}</dd></dl>`;}
 function whatsappMessage(){
-  const msg=`Hola \u{1F44B} Quiero cotizar mi celebración con Grands Moments.
+  const msg=`Hola, quiero cotizar mi celebración con Grands Moments.
 
-\u{1F389} Evento: ${quote.event||'Por definir'}
-\u{1F388} Servicios: ${quote.services.join(' + ')||'Por definir'}
-\u{1F4C5} Fecha: ${formatDate(quote.date)}
-\u{2728} Idea o temática: ${quote.idea||'Por definir'}
-\u{1F464} Nombre: ${quote.name||'Por definir'}
+\u2022 Evento: ${quote.event||'Por definir'}
+\u2022 Servicios: ${quote.services.join(' + ')||'Por definir'}
+\u2022 Fecha: ${formatDate(quote.date)}
+\u2022 Idea o temática: ${quote.idea||'Por definir'}
+\u2022 Nombre: ${quote.name||'Por definir'}
 
-¿Me pueden confirmar disponibilidad para esa fecha y ayudarme con una propuesta?`;
+¿Tienen disponibilidad para esa fecha? Me gustaría recibir una propuesta.`;
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg.normalize('NFC'))}`;
 }
 function validateLead(){
