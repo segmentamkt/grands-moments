@@ -33,7 +33,7 @@
 .multi-select-note strong{font-size:.8rem;color:#746a78;text-align:right}
 @media(max-width:680px){.multi-select-note{align-items:flex-start;flex-direction:column;gap:3px}.multi-select-note strong{text-align:left}}
 .field{width:100%;border:1px solid var(--line);border-radius:16px;padding:15px 16px;background:#fff;color:var(--ink);outline:none}.field:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(74,36,97,.09)}
-.lead-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.lead-fields{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
 .lead-fields .field{min-height:52px}
 .consent-row{display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fbfafc;color:#665e69;font-size:.8rem;line-height:1.45}
 .consent-row input{width:18px;height:18px;flex:0 0 auto;margin-top:1px;accent-color:var(--purple)}
@@ -241,7 +241,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}.opti
     <div class="quote-step active" data-step="1"><h3>1. ¿Qué vas a celebrar?</h3><p class="hint">Selecciona una opción para continuar.</p><div class="option-grid" id="eventOptions"><button class="option" data-value="Cumpleaños">Cumpleaños</button><button class="option" data-value="Baby Shower">Baby Shower</button><button class="option" data-value="Fiesta infantil">Fiesta infantil</button><button class="option" data-value="Ocasión especial">Ocasión especial</button></div></div>
     <div class="quote-step" data-step="2"><h3>2. ¿Qué servicios necesitas?</h3><p class="hint">Puedes elegir <strong>uno o varios servicios</strong>. Toca cada opción que quieras incluir en tu cotización.</p><div class="multi-select-note" role="status" aria-live="polite"><span>Selección múltiple disponible</span><strong id="serviceSelectionCount">Ningún servicio seleccionado</strong></div><div class="option-grid" id="serviceOptions"><button class="option" data-value="Decoración" aria-pressed="false">Decoración</button><button class="option" data-value="Sonido" aria-pressed="false">Sonido</button><button class="option" data-value="Luces" aria-pressed="false">Luces</button><button class="option" data-value="Recreación" aria-pressed="false">Recreación</button></div></div>
     <div class="quote-step" data-step="3"><h3>3. ¿Cuándo será?</h3><p class="hint">Si aún no tienes fecha, puedes dejarla vacía.</p><input class="field" id="eventDate" type="date" aria-label="Fecha del evento"></div>
-    <div class="quote-step" data-step="4"><h3>4. Cuéntanos tu idea y cómo contactarte</h3><p class="hint">Déjanos los datos básicos para preparar tu solicitud y continuar contigo por WhatsApp.</p><textarea class="field" id="eventIdea" placeholder="Ejemplo: una fiesta infantil inspirada en granja, con tonos rojo, verde y azul."></textarea><div class="lead-fields"><input class="field" id="leadName" type="text" autocomplete="name" placeholder="Tu nombre" aria-label="Nombre"><input class="field" id="leadPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Tu número de WhatsApp" aria-label="Número de WhatsApp"></div><label class="consent-row"><input id="leadConsent" type="checkbox"><span><strong>Autorizo el contacto por WhatsApp</strong> para atender esta solicitud de cotización y dar seguimiento relacionado con mi evento.</span></label><p class="campaign-note">Tus datos se solicitan únicamente para poder responder esta cotización.</p><div class="quote-summary" id="quoteSummary"></div><div class="final-actions"><button class="btn btn-primary" id="whatsappBtn" type="button">Recibir mi cotización por WhatsApp</button><button class="btn btn-secondary" id="restartBtn" type="button">Empezar de nuevo</button></div></div>
+    <div class="quote-step" data-step="4"><h3>4. Cuéntanos tu idea</h3><p class="hint">Déjanos tu nombre y los detalles de tu idea para preparar la solicitud antes de continuar por WhatsApp.</p><textarea class="field" id="eventIdea" placeholder="Ejemplo: una fiesta infantil inspirada en granja, con tonos rojo, verde y azul."></textarea><div class="lead-fields"><input class="field" id="leadName" type="text" autocomplete="name" placeholder="Tu nombre" aria-label="Nombre"></div><label class="consent-row"><input id="leadConsent" type="checkbox"><span><strong>Autorizo el contacto por WhatsApp</strong> para atender esta solicitud de cotización y dar seguimiento relacionado con mi evento.</span></label><p class="campaign-note">Tus datos se solicitan únicamente para poder responder esta cotización.</p><div class="quote-summary" id="quoteSummary"></div><div class="final-actions"><button class="btn btn-primary" id="whatsappBtn" type="button">Recibir mi cotización por WhatsApp</button><button class="btn btn-secondary" id="restartBtn" type="button">Empezar de nuevo</button></div></div>
     <div class="quote-nav"><button class="btn btn-secondary" id="prevStep" type="button" style="visibility:hidden">Atrás</button><button class="btn btn-primary" id="nextStep" type="button">Continuar</button></div>
   </div>
 </div></div></section>
@@ -434,7 +434,7 @@ if(mobileVideoMode.addEventListener){
 focusVideo('cumple');
 
 // Quote wizard.
-let quote={event:'',services:[],date:'',idea:'',name:'',phone:''},step=1;
+let quote={event:'',services:[],date:'',idea:'',name:''},step=1;
 const steps=[...document.querySelectorAll('.quote-step')],pills=[...document.querySelectorAll('.step-pill')];
 const prev=document.querySelector('#prevStep'),next=document.querySelector('#nextStep');
 const eventBtns=[...document.querySelectorAll('#eventOptions .option')],serviceBtns=[...document.querySelectorAll('#serviceOptions .option')];
@@ -461,15 +461,14 @@ function renderStep(){steps.forEach(s=>s.classList.toggle('active',Number(s.data
 function canAdvance(){if(step===1&&!quote.event){alert('Selecciona el tipo de evento para continuar.');return false}if(step===2&&quote.services.length===0){alert('Selecciona al menos un servicio para continuar.');return false}return true}
 let quoteStarted=false;
 next.addEventListener('click',()=>{if(!canAdvance())return;if(!quoteStarted){quoteStarted=true;pushTracking('QuoteStart',{entry_point:'guided_quote'})}if(step===3)quote.date=document.querySelector('#eventDate').value;if(step<4){step++;renderStep()}});prev.addEventListener('click',()=>{if(step>1){step--;renderStep()}});
-document.querySelector('#eventIdea').addEventListener('input',e=>{quote.idea=e.target.value;renderSummary()});document.querySelector('#leadName').addEventListener('input',renderSummary);document.querySelector('#leadPhone').addEventListener('input',renderSummary);
+document.querySelector('#eventIdea').addEventListener('input',e=>{quote.idea=e.target.value;renderSummary()});document.querySelector('#leadName').addEventListener('input',renderSummary);
 document.querySelector('#eventDate').addEventListener('change',e=>quote.date=e.target.value);
 function formatDate(value){if(!value)return 'Por definir';const [y,m,d]=value.split('-').map(Number);return new Intl.DateTimeFormat('es-CO',{day:'numeric',month:'long',year:'numeric'}).format(new Date(y,m-1,d));}
-function renderSummary(){quote.date=document.querySelector('#eventDate').value;quote.idea=document.querySelector('#eventIdea').value.trim();quote.name=document.querySelector('#leadName').value.trim();quote.phone=document.querySelector('#leadPhone').value.trim();document.querySelector('#quoteSummary').innerHTML=`<dl><dt>Evento</dt><dd>${quote.event||'Por definir'}</dd><dt>Servicios</dt><dd>${quote.services.join(' + ')||'Por definir'}</dd><dt>Fecha</dt><dd>${formatDate(quote.date)}</dd><dt>Idea</dt><dd>${quote.idea||'Sin detalle adicional'}</dd><dt>Nombre</dt><dd>${quote.name||'Por definir'}</dd><dt>WhatsApp</dt><dd>${quote.phone||'Por definir'}</dd></dl>`;}
+function renderSummary(){quote.date=document.querySelector('#eventDate').value;quote.idea=document.querySelector('#eventIdea').value.trim();quote.name=document.querySelector('#leadName').value.trim();document.querySelector('#quoteSummary').innerHTML=`<dl><dt>Evento</dt><dd>${quote.event||'Por definir'}</dd><dt>Servicios</dt><dd>${quote.services.join(' + ')||'Por definir'}</dd><dt>Fecha</dt><dd>${formatDate(quote.date)}</dd><dt>Idea</dt><dd>${quote.idea||'Sin detalle adicional'}</dd><dt>Nombre</dt><dd>${quote.name||'Por definir'}</dd></dl>`;}
 function whatsappMessage(){
   const msg=`Hola, vi la página de Grands Moments y quiero cotizar mi celebración.
 
 - Nombre: ${quote.name||'Por definir'}
-- WhatsApp: ${quote.phone||'Por definir'}
 - Evento: ${quote.event||'Por definir'}
 - Servicios: ${quote.services.join(' + ')||'Por definir'}
 - Fecha: ${formatDate(quote.date)}
@@ -480,10 +479,7 @@ Quisiera recibir más información.`;
 }
 function validateLead(){
   quote.name=document.querySelector('#leadName').value.trim();
-  quote.phone=document.querySelector('#leadPhone').value.trim();
-  const digits=quote.phone.replace(/\D/g,'');
   if(quote.name.length<2){alert('Escribe tu nombre para continuar.');document.querySelector('#leadName').focus();return false}
-  if(digits.length<7){alert('Escribe un número de WhatsApp válido para continuar.');document.querySelector('#leadPhone').focus();return false}
   if(!document.querySelector('#leadConsent').checked){alert('Autoriza el contacto por WhatsApp para continuar.');return false}
   return true;
 }
@@ -495,7 +491,7 @@ document.querySelector('#whatsappBtn').addEventListener('click',()=>{
   pushTracking('Contact',{channel:'whatsapp',event_type:quote.event||'Por definir'});
   window.open(whatsappMessage(),'_blank','noopener');
 });
-document.querySelector('#restartBtn').addEventListener('click',()=>{quote={event:'',services:[],date:'',idea:'',name:'',phone:''};eventBtns.forEach(b=>b.classList.remove('selected'));document.querySelector('#eventDate').value='';document.querySelector('#eventIdea').value='';document.querySelector('#leadName').value='';document.querySelector('#leadPhone').value='';document.querySelector('#leadConsent').checked=false;renderServiceSelection();step=1;renderStep();});
+document.querySelector('#restartBtn').addEventListener('click',()=>{quote={event:'',services:[],date:'',idea:'',name:''};eventBtns.forEach(b=>b.classList.remove('selected'));document.querySelector('#eventDate').value='';document.querySelector('#eventIdea').value='';document.querySelector('#leadName').value='';document.querySelector('#leadConsent').checked=false;renderServiceSelection();step=1;renderStep();});
 renderServiceSelection();
 renderStep();
 
