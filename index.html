@@ -241,7 +241,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}.opti
     <div class="quote-step active" data-step="1"><h3>1. ¿Qué vas a celebrar?</h3><p class="hint">Selecciona una opción para continuar.</p><div class="option-grid" id="eventOptions"><button class="option" data-value="Cumpleaños">Cumpleaños</button><button class="option" data-value="Baby Shower">Baby Shower</button><button class="option" data-value="Fiesta infantil">Fiesta infantil</button><button class="option" data-value="Ocasión especial">Ocasión especial</button></div></div>
     <div class="quote-step" data-step="2"><h3>2. ¿Qué servicios necesitas?</h3><p class="hint">Puedes elegir <strong>uno o varios servicios</strong>. Toca cada opción que quieras incluir en tu cotización.</p><div class="multi-select-note" role="status" aria-live="polite"><span>Selección múltiple disponible</span><strong id="serviceSelectionCount">Ningún servicio seleccionado</strong></div><div class="option-grid" id="serviceOptions"><button class="option" data-value="Decoración" aria-pressed="false">Decoración</button><button class="option" data-value="Sonido" aria-pressed="false">Sonido</button><button class="option" data-value="Luces" aria-pressed="false">Luces</button><button class="option" data-value="Recreación" aria-pressed="false">Recreación</button></div></div>
     <div class="quote-step" data-step="3"><h3>3. ¿Cuándo será?</h3><p class="hint">Si aún no tienes fecha, puedes dejarla vacía.</p><input class="field" id="eventDate" type="date" aria-label="Fecha del evento"></div>
-    <div class="quote-step" data-step="4"><h3>4. Cuéntanos tu idea</h3><p class="hint">Déjanos tu nombre y los detalles de tu idea para preparar la solicitud antes de continuar por WhatsApp.</p><textarea class="field" id="eventIdea" placeholder="Ejemplo: una fiesta infantil inspirada en granja, con tonos rojo, verde y azul."></textarea><div class="lead-fields"><input class="field" id="leadName" type="text" autocomplete="name" placeholder="Tu nombre" aria-label="Nombre"></div><label class="consent-row"><input id="leadConsent" type="checkbox"><span><strong>Autorizo el contacto por WhatsApp</strong> para atender esta solicitud de cotización y dar seguimiento relacionado con mi evento.</span></label><p class="campaign-note">Tus datos se solicitan únicamente para poder responder esta cotización.</p><div class="quote-summary" id="quoteSummary"></div><div class="final-actions"><button class="btn btn-primary" id="whatsappBtn" type="button">Recibir mi cotización por WhatsApp</button><button class="btn btn-secondary" id="restartBtn" type="button">Empezar de nuevo</button></div></div>
+    <div class="quote-step" data-step="4"><h3>4. Cuéntanos tu idea</h3><p class="hint">Déjanos tu nombre y los detalles de tu idea para preparar la solicitud antes de continuar por WhatsApp.</p><textarea class="field" id="eventIdea" placeholder="Ejemplo: una fiesta infantil inspirada en granja, con tonos rojo, verde y azul."></textarea><div class="lead-fields"><input class="field" id="leadName" type="text" autocomplete="name" placeholder="Tu nombre" aria-label="Nombre"></div><label class="consent-row"><input id="leadConsent" type="checkbox"><span><strong>Autorizo el contacto por WhatsApp</strong> para atender esta solicitud de cotización y dar seguimiento relacionado con mi evento.</span></label><p class="campaign-note">Tus datos se solicitan únicamente para poder responder esta cotización.</p><div class="quote-summary" id="quoteSummary"></div><div class="final-actions"><button class="btn btn-primary" id="whatsappBtn" type="button">Solicitar mi cotización por WhatsApp</button><button class="btn btn-secondary" id="restartBtn" type="button">Empezar de nuevo</button></div></div>
     <div class="quote-nav"><button class="btn btn-secondary" id="prevStep" type="button" style="visibility:hidden">Atrás</button><button class="btn btn-primary" id="nextStep" type="button">Continuar</button></div>
   </div>
 </div></div></section>
@@ -466,15 +466,15 @@ document.querySelector('#eventDate').addEventListener('change',e=>quote.date=e.t
 function formatDate(value){if(!value)return 'Por definir';const [y,m,d]=value.split('-').map(Number);return new Intl.DateTimeFormat('es-CO',{day:'numeric',month:'long',year:'numeric'}).format(new Date(y,m-1,d));}
 function renderSummary(){quote.date=document.querySelector('#eventDate').value;quote.idea=document.querySelector('#eventIdea').value.trim();quote.name=document.querySelector('#leadName').value.trim();document.querySelector('#quoteSummary').innerHTML=`<dl><dt>Evento</dt><dd>${quote.event||'Por definir'}</dd><dt>Servicios</dt><dd>${quote.services.join(' + ')||'Por definir'}</dd><dt>Fecha</dt><dd>${formatDate(quote.date)}</dd><dt>Idea</dt><dd>${quote.idea||'Sin detalle adicional'}</dd><dt>Nombre</dt><dd>${quote.name||'Por definir'}</dd></dl>`;}
 function whatsappMessage(){
-  const msg=`Hola, vi la página de Grands Moments y quiero cotizar mi celebración.
+  const msg=`Hola \u{1F44B} Quiero cotizar mi celebración con Grands Moments.
 
-- Nombre: ${quote.name||'Por definir'}
-- Evento: ${quote.event||'Por definir'}
-- Servicios: ${quote.services.join(' + ')||'Por definir'}
-- Fecha: ${formatDate(quote.date)}
-- Idea o temática: ${quote.idea||'Por definir'}
+\u{1F389} Evento: ${quote.event||'Por definir'}
+\u{1F388} Servicios: ${quote.services.join(' + ')||'Por definir'}
+\u{1F4C5} Fecha: ${formatDate(quote.date)}
+\u{2728} Idea o temática: ${quote.idea||'Por definir'}
+\u{1F464} Nombre: ${quote.name||'Por definir'}
 
-Quisiera recibir más información.`;
+¿Me pueden confirmar disponibilidad para esa fecha y ayudarme con una propuesta?`;
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg.normalize('NFC'))}`;
 }
 function validateLead(){
